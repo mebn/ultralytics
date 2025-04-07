@@ -19,6 +19,9 @@ __all__ = (
     "ChannelAttention",
     "SpatialAttention",
     "CBAM",
+    "SE",
+    "ECA",
+    "CA",
     "Concat",
     "RepConv",
     "Index",
@@ -650,6 +653,18 @@ class CBAM(nn.Module):
             (torch.Tensor): Attended output tensor.
         """
         return self.spatial_attention(self.channel_attention(x))
+
+
+class SE(nn.Module):
+    pass
+
+
+class ECA(nn.Module):
+    pass
+
+
+class CA(nn.Module):
+    pass
 
 
 class Concat(nn.Module):

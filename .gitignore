@@ -173,3 +173,6 @@ pnnx*
 
 # calibration image
 calibration_*.npy
+
+playground.py
+yolo11-efficientnet_cbam.yaml

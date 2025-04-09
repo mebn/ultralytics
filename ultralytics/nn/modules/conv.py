@@ -674,7 +674,7 @@ class SE(nn.Module):
 
 
 class ECA(nn.Module):
-    def __init__(self, k_size=3):
+    def __init__(self, c1, k_size=3):
         super().__init__()
         self.avg_pool = nn.AdaptiveAvgPool2d(1)
         self.conv = nn.Conv1d(1, 1, kernel_size=k_size, padding=(k_size - 1) // 2, bias=False)
@@ -682,10 +682,13 @@ class ECA(nn.Module):
 
     def forward(self, x):
         y = self.avg_pool(x)
-        y = y.squeeze(-1).transpose(-1, -2)
+        y = y.squeeze(-1).squeeze(-1)
+        y = y.unsqueeze(1)
         y = self.conv(y)
-        y = self.sigmoid(y).transpose(-1, -2).unsqueeze(-1)
+        y = self.sigmoid(y)
+        y = y.squeeze(1).unsqueeze(-1).unsqueeze(-1)
         return x * y.expand_as(x)
+
 
 
 
